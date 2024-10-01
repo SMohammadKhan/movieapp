@@ -1,7 +1,6 @@
-package moviea.movie123app.Entity;
+package moviea.movie123app;
 
 import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,44 +9,28 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "movies")
-public class Movies {
+public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String genre;
     private boolean isPopular;
     private String poster;
-     private LocalDate releaseDate; 
-     
-    
+    private LocalDate releaseDate;
 
-    public void setPopular(boolean isPopular) {
-        this.isPopular = isPopular;
-    }
+    public Movie() {}
 
-    public String getPoster() {
-        return poster;
-    }
-
-    public void setPoster(String poster) {
-        this.poster = poster;
-    }
-
-    
-    public Movies() {
-    }
-
-    public Movies(String title, String genre, boolean isPopular,String poster,LocalDate date) {
+    public Movie(String title, String genre, boolean isPopular, String poster, LocalDate releaseDate) {
         this.title = title;
         this.genre = genre;
         this.isPopular = isPopular;
-        this.poster=poster;
-        this.releaseDate=date;
+        this.poster = poster;
+        this.releaseDate = releaseDate;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -72,12 +55,20 @@ public class Movies {
         this.genre = genre;
     }
 
-    public boolean getIsPopular() {
+    public boolean isPopular() {
         return isPopular;
     }
 
-    public void setIsPopular(boolean isPopular) {
+    public void setPopular(boolean isPopular) {
         this.isPopular = isPopular;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
     }
 
     public LocalDate getReleaseDate() {
@@ -88,3 +79,5 @@ public class Movies {
         this.releaseDate = releaseDate;
     }
 }
+
+//modified

@@ -1,27 +1,50 @@
 package moviea.movie123app;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import moviea.movie123app.Entity.Movies;
+import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/movies")
 public class controller {
-    
-    private final MovieSerive movieService;
 
-public controller(MovieSerive movieService) {
+    private final MovieService movieService;
+
+    public controller(MovieService movieService) {
         this.movieService = movieService;
     }
 
-    @PostMapping("saveMovies")  //Saving the data means postmapping
-    public Movies saved(@RequestBody Movies m) { //here we're loading entire entity class so request body
-    return movieService.saved(m);   //we've override autowired annotation so that y savedata
+    @PostMapping("/save")
+    public Movie save(@RequestBody Movie movie) {
+        return movieService.save(movie);
+    }
 
+    @PostMapping("/bulk")
+    public List<Movie> saveBulk(@RequestBody List<Movie> movies) {
+        return movieService.saveBulk(movies);
+    }
+
+    @GetMapping("/popular")
+    public List<Movie> getPopularMovies() {
+        return movieService.getPopularMovies();
+    }
+
+    @GetMapping("/genre/{genre}")
+    public List<Movie> getMoviesByGenre(@PathVariable String genre) {
+        return movieService.getMoviesByGenre(genre);
+    }
+
+    @GetMapping("/find/{name}")
+    public Movie findByName(@PathVariable String name) {
+        return movieService.findByName(name);
+    }
+
+    @GetMapping("/upcoming")
+    public List<Movie> getUpcomingMovies() {
+        return movieService.getUpcomingMovies();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteMovie(@PathVariable Long id) {
+        return movieService.deleteMovie(id);
+    }
 }
-
-}
-
